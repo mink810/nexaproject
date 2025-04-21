@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="frmReport" left="0" top="0" width="1024" height="768" titletext="New Form">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" taborder="0" text="리포트" left="19.82%" top="148" right="21%" height="305" style="align:middle;font:bold 48 Dotum;"/>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

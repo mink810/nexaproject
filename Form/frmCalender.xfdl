@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="frmCalendar" left="0" top="0" width="1024" height="768" titletext="New Form" onload="frmCalendar_onload">
+    <Layouts>
+      <Layout>
+        <Grid id="Grid00" taborder="0" left="5.08%" top="86" right="5.08%" height="654" autofittype="col" binddataset="Dataset00" selecttype="cell" oncellclick="Grid00_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="77"/>
+                <Column size="76"/>
+                <Column size="67"/>
+                <Column size="62"/>
+                <Column size="71"/>
+                <Column size="73"/>
+                <Column size="79"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="100"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="일"/>
+                <Cell col="1" text="월"/>
+                <Cell col="2" text="화"/>
+                <Cell col="3" text="수"/>
+                <Cell col="4" text="목"/>
+                <Cell col="5" text="금"/>
+                <Cell col="6" text="토"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:col0"/>
+                <Cell col="1" text="bind:col1"/>
+                <Cell col="2" text="bind:col2"/>
+                <Cell col="3" text="bind:col3"/>
+                <Cell col="4" text="bind:col4"/>
+                <Cell col="5" text="bind:col5"/>
+                <Cell col="6" style="background:bisque;" text="bind:col6"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Div id="Div00" taborder="1" text="Div00" left="4.3%" top="13" right="5.96%" height="74">
+          <Layouts>
+            <Layout width="919" height="74">
+              <Static id="lb_month" taborder="0" text="Static00" left="38.08%" top="9" right="38.52%" height="55" style="align:middle;font:26 Dotum;"/>
+              <Button id="btnPrev" taborder="1" text="&lt;" left="26.44%" top="7" right="63.76%" height="55" onclick="Div00_btnPrev_onclick" style="background:transparent;border:1 none #999999ff ;font:bold 26 Dotum;"/>
+              <Button id="btnNext" taborder="2" text="&gt;" left="61.92%" top="7" right="27.97%" height="58" style="background:transparent;border:1 none #999999ff ;font:bold 26 Dotum;" onclick="Div00_btnNext_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00"/>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[// 현재 연도와 월
+this.currentYear = 2025;
+this.currentMonth = 4;
+
+// 이전 달로 이동하는 버튼 클릭 이벤트
+this.Div00_btnPrev_onclick = function(obj:Button, e:nexacro.ClickEventInfo) {
+    this.currentMonth--;
+    if (this.currentMonth < 1) {
+        this.currentMonth = 12;
+        this.currentYear--;
+    }
+    this.drawCalendar(this.currentYear, this.currentMonth);
+};
+
+// 다음 달로 이동하는 버튼 클릭 이벤트
+this.Div00_btnNext_onclick = function(obj:Button, e:nexacro.ClickEventInfo) {
+    this.currentMonth++;
+    if (this.currentMonth > 12) {
+        this.currentMonth = 1;
+        this.currentYear++;
+    }
+    this.drawCalendar(this.currentYear, this.currentMonth);
+};
+
+// 폼 로딩 시 달력 초기화
+this.frmCalendar_onload = function(obj:Form, e:nexacro.LoadEventInfo) {
+    var reservations = application.gds_reservation;
+    var rowCount = reservations.getRowCount();
+
+    for (var i = 0; i < rowCount; i++) {
+        var startDate = reservations.getColumn(i, "start_date");
+        var endDate = reservations.getColumn(i, "end_date");
+    }
+
+    this.drawCalendar(this.currentYear, this.currentMonth);
+};
+
+// 특정 날짜에 예약이 있는지 확인하는 함수
+this.checkReservationForDate = function(dateString) {
+    var reservations = application.gds_reservation;
+    var reservationCount = reservations.getRowCount();
+
+    var checkDate = new Date(dateString);
+
+    for (var i = 0; i < reservationCount; i++) {
+        var rawStart = reservations.getColumn(i, "start_date");
+        var rawEnd = reservations.getColumn(i, "end_date");
+
+        var startDate = new Date(rawStart);
+        var endDate = new Date(rawEnd);
+
+        if (checkDate >= startDate && checkDate <= endDate) {
+            return true;
+        }
+    }
+    return false;
+};
+
+// 달력 그리는 함수
+this.drawCalendar = function(year, month) {
+    this.Dataset00.clear();
+
+    for (var i = 0; i < 7; i++) {
+        this.Dataset00.addColumn("col" + i, "STRING");
+        this.Dataset00.addColumn("style" + i, "STRING");
+        this.Grid00.setCellProperty("body", i, "text", "bind:col" + i);
+        this.Grid00.setCellProperty("body", i, "style", "bind:style" + i);
+    }
+    for (var i = 0; i < 6; i++) {
+        this.Dataset00.addRow();
+    }
+
+    var firstDate = new Date(year, month - 1, 1);
+    var startDay = firstDate.getDay();
+    var lastDate = new Date(year, month, 0).getDate();
+
+    var date = 1;
+    for (var row = 0; row < 6; row++) {
+        for (var col = 0; col < 7; col++) {
+            var cellIndex = row * 7 + col;
+            if (cellIndex >= startDay && date <= lastDate) {
+                var mm = (month < 10 ? "0" : "") + month;
+                var dd = (date < 10 ? "0" : "") + date;
+                var dateString = year + "-" + mm + "-" + dd;
+                var hasReservation = this.checkReservationForDate(dateString);
+
+                if (hasReservation) {
+                    this.Dataset00.setColumn(row, "col" + col, date + " (예약됨)");
+                    this.Grid00.setCellProperty("body", row * 7 + col, "background", "yellow");
+                } else {
+                    this.Dataset00.setColumn(row, "col" + col, date + "");
+                    this.Grid00.setCellProperty("body", row * 7 + col, "background", "transparent");
+                }
+                date++;
+            } else {
+                this.Dataset00.setColumn(row, "col" + col, "");
+                this.Grid00.setCellProperty("body", row * 7 + col, "background", "transparent");
+            }
+        }
+    }
+
+    this.Div00.lb_month.set_text(this.currentYear + "년 " + this.currentMonth + "월");
+    this.Dataset00.set_rowposition(0);
+};
+
+
+
+// 그리드 셀 클릭 시 예약 정보 표시
+this.Grid00_oncellclick = function(obj:Grid, e:nexacro.GridClickEventInfo) {
+    var row = e.row;
+    var col = e.cell;
+
+    var colId = "col" + col;
+    var clickedDate = this.Dataset00.getColumn(row, colId);
+
+    if (!clickedDate || clickedDate == "") return;
+
+    var dateOnly = clickedDate.split(" ")[0];
+    var mm = (this.currentMonth < 10 ? "0" : "") + this.currentMonth;
+    var dd = (dateOnly < 10 ? "0" : "") + dateOnly;
+    var dateString = this.currentYear + "-" + mm + "-" + dd;
+
+    var reservationInfo = this.getReservationDetail(dateString);
+
+    if (reservationInfo) {
+        var msg = "예약 ID: " + reservationInfo.reservation_id + "\n" +
+                  "고객 ID: " + reservationInfo.customer_id + "\n" +
+                  "차량 ID: " + reservationInfo.car_id + "\n" +
+                  "기간: " + reservationInfo.start_date + " ~ " + reservationInfo.end_date + "\n" +
+                  "상태: " + reservationInfo.status + "\n" +
+                  "비고: " + reservationInfo.note;
+
+        this.alert(msg);
+    }
+};
+]]></Script>
+  </Form>
+</FDL>

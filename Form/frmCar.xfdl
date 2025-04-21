@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="frmCar" left="0" top="0" width="1024" height="768" titletext="New Form">
+    <Layouts>
+      <Layout>
+        <Grid id="Grid00" taborder="0" left="28.13%" top="18" right="2.05%" height="734" binddataset="gds_cars" autofittype="col" oncellclick="Grid00_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="year"/>
+                <Cell col="1" text="manufacturer"/>
+                <Cell col="2" text="model"/>
+                <Cell col="3" text="status"/>
+                <Cell col="4" text="fuel"/>
+                <Cell col="5" text="price_per_day"/>
+                <Cell col="6" text="type"/>
+                <Cell col="7" text="class"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:year"/>
+                <Cell col="1" text="bind:manufacturer"/>
+                <Cell col="2" text="bind:model"/>
+                <Cell col="3" style="background:EXPR(status=='점검중' ? 'red' : status=='렌트중' ? 'orange' : '');background2:EXPR(status=='점검중' ? 'red' : status=='렌트중' ? 'orange' : '');" text="bind:status"/>
+                <Cell col="4" text="bind:fuel"/>
+                <Cell col="5" text="bind:price_per_day"/>
+                <Cell col="6" text="bind:type"/>
+                <Cell col="7" text="bind:class"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Div id="Div00" taborder="1" left="1.56%" top="18" right="73.05%" height="734" style="background:darkgray;">
+          <Layouts>
+            <Layout width="260" height="670">
+              <Combo id="Combo00" taborder="0" text="Combo00" left="15.77%" top="194" right="11.54%" height="26" innerdataset="@ds_maker" codecolumn="maker" datacolumn="maker"/>
+              <Combo id="Combo02" taborder="2" text="Combo00" left="15.77%" top="296" right="11.54%" height="26" innerdataset="@ds_status" codecolumn="status" datacolumn="status"/>
+              <Radio id="Radio00" taborder="5" left="15.77%" top="577" right="11.54%" height="26" innerdataset="@ds_class" codecolumn="class" datacolumn="class" columncount="2"/>
+              <Combo id="Combo01" taborder="6" text="Combo00" left="15.77%" top="225" right="11.54%" height="26"/>
+              <Combo id="Combo05" taborder="7" text="Combo00" left="15.77%" top="516" right="11.54%" height="26" onitemchanged="Div00_Combo05_onitemchanged" innerdataset="@ds_carType" codecolumn="type" datacolumn="type"/>
+              <CheckBox id="CheckBox00" taborder="8" text="경유" left="15.38%" top="361" right="48.08%" height="26"/>
+              <Button id="Button00" taborder="9" text="조회" left="15.77%" top="640" right="11.54%" height="26" onclick="Div00_Button00_onclick"/>
+              <Static id="Static00" taborder="10" text="제조사/ 모델" left="15.77%" top="172" right="11.54%" height="26" style="font:bold 9 Dotum;"/>
+              <Static id="Static01" taborder="11" text="상태" left="15.77%" top="274" right="11.54%" height="26" style="font:bold 9 Dotum;"/>
+              <Static id="Static02" taborder="12" text="연료" left="15.77%" top="335" right="11.54%" height="26" style="font:bold 9 Dotum;"/>
+              <Static id="Static03" taborder="13" text="가격대" left="15.77%" top="400" right="11.54%" height="26" style="font:bold 9 Dotum;"/>
+              <Static id="Static04" taborder="14" text="타입" left="15.77%" top="496" right="11.54%" height="26" style="font:bold 9 Dotum;"/>
+              <Static id="Static05" taborder="15" text="클래스" left="15.77%" top="558" right="11.54%" height="26" style="font:bold 9 Dotum;"/>
+              <MaskEdit id="minPrice" taborder="16" left="15.77%" top="424" right="19.23%" height="26" mask="#,###"/>
+              <MaskEdit id="maxPrice" taborder="17" left="15.77%" top="454" right="19.23%" height="26" mask="#,###"/>
+              <Calendar id="cldSdate" taborder="18" left="15.77%" top="59" right="11.54%" height="26"/>
+              <Calendar id="cldEdate" taborder="19" left="15.77%" top="118" right="11.54%" height="26"/>
+              <Static id="Static06" taborder="20" text="사용 시작일" left="15.77%" top="36" right="11.54%" height="26" style="font:bold 9 Dotum;"/>
+              <Static id="Static07" taborder="21" text="반납일" left="15.77%" top="92" right="11.54%" height="26" style="font:bold 9 Dotum;"/>
+              <CheckBox id="CheckBox01" taborder="22" text="디젤" left="36.92%" top="361" right="26.54%" height="26"/>
+              <CheckBox id="CheckBox02" taborder="23" text="전기" left="58.46%" top="361" right="5%" height="26"/>
+              <Static id="Static08" taborder="24" text="~" left="82.69%" top="424" right="6.15%" height="29" style="font:12 Dotum;"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Bind/>
+    <Objects>
+      <Dataset id="ds_cars">
+        <ColumnInfo>
+          <Column id="name" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_status">
+        <ColumnInfo>
+          <Column id="status" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="status">점검중</Col>
+          </Row>
+          <Row>
+            <Col id="status">사용가능</Col>
+          </Row>
+          <Row>
+            <Col id="status">렌트중</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_maker">
+        <ColumnInfo>
+          <Column id="maker" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="maker">기아</Col>
+          </Row>
+          <Row>
+            <Col id="maker">현대</Col>
+          </Row>
+          <Row>
+            <Col id="maker">벤츠</Col>
+          </Row>
+          <Row>
+            <Col id="maker">BMW</Col>
+          </Row>
+          <Row>
+            <Col id="maker">테슬라</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_carType">
+        <ColumnInfo>
+          <Column id="type" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="type">소형</Col>
+          </Row>
+          <Row>
+            <Col id="type">중형</Col>
+          </Row>
+          <Row>
+            <Col id="type">대형</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_class">
+        <ColumnInfo>
+          <Column id="class" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="class">일반</Col>
+          </Row>
+          <Row>
+            <Col id="class">럭셔리</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[
+this.Grid00_oncellclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+
+	    var row = e.row;
+    var status = obj.getBindDataset().getColumn(row, "status");
+
+    if (status == "점검중" || status == "렌트중") {
+        return; // 클릭 무시
+    }
+    
+    
+	    var row = e.row;
+    if (row < 0) return;
+
+    var sPopupId = "popupProduct";
+    var sUrl = "Frame::frmPopup.xfdl";
+    var objArgs = { openerRow: row };
+    var sOption = "showtitlebar=true showstatusbar=false";
+    var nLeft = 500;
+    var nTop = 100;
+    var nWidth = 500;
+    var nHeight = 600;
+
+    application.open(
+        sPopupId,
+        sUrl,
+        this.getOwnerFrame(),
+        objArgs,
+        sOption,
+        nLeft,
+        nTop,
+        nWidth,
+        nHeight
+    );
+}
+
+this.Div00_Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	    var maker = this.Div00.Combo00.value;
+		var status = this.Div00.Combo02.value;
+		var minPrice = this.Div00.minPrice.value;
+		var maxPrice = this.Div00.maxPrice.value;
+		var type = this.Div00.Combo05.value;
+		var carClass = this.Div00.Radio00.value;
+
+    // 전역 Dataset 접근
+    var cars = application.gds_cars;
+
+    // 필터 초기화
+    cars.filter("");
+
+    var condition = [];
+
+    if (maker) {
+        condition.push("manufacturer == '" + maker + "'");
+    }
+    if (status) {
+        condition.push("status == '" + status + "'");
+    }
+    
+	if (minPrice !== null && minPrice !== "" && !isNaN(minPrice)) {
+		condition.push("price_per_day >= " + minPrice);
+	}
+	if (maxPrice !== null && maxPrice !== "" && !isNaN(maxPrice)) {
+		condition.push("price_per_day <= " + maxPrice);
+	}
+
+	    if (type) {
+        condition.push("type == '" + type + "'");
+    }
+    if (carClass) {
+        condition.push("class == '" + carClass + "'");
+    }
+    if (condition.length > 0) {
+        cars.filter(condition.join(" && "));
+        
+    }
+    
+    trace("필터 조건: " + condition.join(" && "));
+
+}
+]]></Script>
+  </Form>
+</FDL>

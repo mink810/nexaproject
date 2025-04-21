@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="LoginForm" left="0" top="0" width="1024" height="768" titletext="New Form">
+    <Layouts>
+      <Layout>
+        <Div id="Div00" taborder="0" text="Div00" left="21.88%" top="112" right="22.66%" height="460" style="background:bisque;">
+          <Layouts>
+            <Layout width="632" height="530">
+              <Edit id="edt_userid" taborder="0" left="23.58%" top="198" right="40.03%" height="32"/>
+              <Button id="btn_login" taborder="2" text="Login" left="60.92%" top="199" right="26.06%" height="69" onclick="Div00_btn_login_onclick"/>
+              <Static id="Static00" taborder="3" text="L O G I N" left="23.59%" top="104" right="27.29%" height="69" style="align:middle;font:bold 12 Dotum;"/>
+              <Static id="Static01" taborder="4" text="회원이 아니신가염? " left="27.82%" top="272" right="36.27%" height="20" style="align:right;"/>
+              <Static id="Static02" taborder="5" text="ID/Password를 잊으셨나염?" left="23.94%" top="296" right="40.85%" height="20" style="align:right;"/>
+              <Static id="Static03" taborder="6" text="회원가입" left="56.34%" top="272" right="26.06%" height="20" style="align:right;font:bold underline 9 Dotum;" onclick="Div00_Static03_onclick"/>
+              <Static id="Static04" taborder="7" text="ID/Pass찾기" left="56.34%" top="296" right="26.06%" height="20" style="align:right;font:bold underline 9 Dotum;"/>
+              <Edit id="edt_password" taborder="8" left="23.59%" top="234" right="39.96%" height="32" password="true"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.0"><![CDATA[this.Div00_btn_login_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+    var inputId = this.Div00.edt_userid.value;
+    var inputPw = this.Div00.edt_password.value;
+
+    // 글로벌 데이터셋을 사용하여 사용자 정보 확인
+    var users = application.gds_users;
+
+    var isLoginSuccess = false;
+    for (var i = 0; i < users.getRowCount(); i++) {
+        var userId = users.getColumn(i, "id");
+        var userPw = users.getColumn(i, "pw");
+
+        if (inputId == userId && inputPw == userPw) {
+            isLoginSuccess = true;
+            break;
+        }
+    }
+
+    if (isLoginSuccess) {
+        alert("로그인 성공!");
+        this.parent.arg_userid = inputId;
+        this.go("Form::frmCar.xfdl");
+    } else {
+        alert("아이디 또는 비밀번호가 틀렸습니다.");
+        this.Div00.edt_userid.set_value("");
+        this.Div00.edt_password.set_value("");
+    }
+}
+
+this.Div00_Static03_onclick = function(obj:Static, e:nexacro.ClickEventInfo)
+{
+    this.go("Form::frmSignup.xfdl");
+}
+
+this.frmLogin_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+    if (this.parent.arg_userid) {
+        this.edt_id.set_value(this.parent.arg_userid);
+    }
+};
+]]></Script>
+  </Form>
+</FDL>

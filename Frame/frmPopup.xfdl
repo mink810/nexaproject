@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="popup" left="0" top="0" width="1024" height="768" titletext="New Form" onload="frmPopup_onload">
+    <Layouts>
+      <Layout>
+        <Div id="Div00" taborder="7" text="Div00" left="5.47%" top="43" right="44.82%" height="474" style="background:white;border:2 solid #808080ff ;">
+          <Layouts>
+            <Layout width="509" height="474">
+              <Static id="sta_name" taborder="1" text="Static00" left="56.63%" top="25" right="2.57%" height="29" style="font:bold 16 Dotum;" onclick="Div00_sta_name_onclick"/>
+              <Static id="sta_price" taborder="2" text="Static00" left="56.63%" top="67" right="18.42%" height="29"/>
+              <Static id="sta_type" taborder="4" text="Static00" left="56.63%" top="166" right="29.5%" height="29"/>
+              <Static id="static04" taborder="5" text="예약일시" left="56.63%" top="131" right="18.42%" height="29"/>
+              <Button id="Button00" taborder="7" text="예약" left="10.69%" top="392" right="50.89%" height="35"/>
+              <Button id="Button01" taborder="8" text="취소" left="51.09%" top="392" right="13.27%" height="35"/>
+              <Static id="sta_reservation" taborder="9" text="가격" left="56.63%" top="204" right="20.2%" height="39"/>
+              <Static id="sta_reservation00" taborder="10" text="Static00" left="56.63%" top="243" right="20.2%" height="39"/>
+              <ImageViewer id="ImageViewer00" taborder="11" text="ImageViewer00" left="6.53%" top="21" right="49.31%" height="254"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.0"><![CDATA[
+this.frmPopup_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	    var row = this.getOwnerFrame().openerRow;  // 부모 프레임의 openerRow 값 가져오기
+	    
+	    var carId = application.gds_cars.getColumn(row, "id");
+	    var year = application.gds_cars.getColumn(row, "year");
+	    var maker = application.gds_cars.getColumn(row, "manufacturer");
+	    var model = application.gds_cars.getColumn(row, "model");
+	    var fuel = application.gds_cars.getColumn(row, "fuel");
+	    var price = application.gds_cars.getColumn(row, "price_per_day");
+		//var start_date = 
+
+    if (row >= 0) {
+        this.Div00.sta_name.set_text(year + " " + maker + " " + model); 
+        this.Div00.sta_price.set_text("가격: " + price);
+//         this.Div00.sta_maker.set_text(application.gds_cars.getColumn(row, "manufacturer"));
+//         this.Div00.str_model.set_text(application.gds_cars.getColumn(row, "model") + " (" + application.gds_cars.getColumn(row, "fuel") + ")");
+
+    }
+}
+ 
+this.Div00_sta_name_onclick = function(obj:Static, e:nexacro.ClickEventInfo)
+{
+	
+}
+]]></Script>
+  </Form>
+</FDL>

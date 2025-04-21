@@ -1,0 +1,522 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<GlobalVariables>
+  <Dataset id="gds_menu">
+    <ColumnInfo>
+      <Column id="m_id" type="STRING" size="256"/>
+      <Column id="m_name" type="STRING" size="256"/>
+      <Column id="m_level" type="STRING" size="256"/>
+      <Column id="m_url" type="STRING" size="256"/>
+    </ColumnInfo>
+    <Rows>
+      <Row>
+        <Col id="m_id">1</Col>
+        <Col id="m_name">main</Col>
+        <Col id="m_level">0</Col>
+        <Col id="m_url">Form::frmMain.xfdl</Col>
+      </Row>
+      <Row>
+        <Col id="m_id">2</Col>
+        <Col id="m_name">car</Col>
+        <Col id="m_level">0</Col>
+        <Col id="m_url">Form::frmCar.xfdl</Col>
+      </Row>
+      <Row>
+        <Col id="m_id">3</Col>
+        <Col id="m_name">calender</Col>
+        <Col id="m_level">0</Col>
+        <Col id="m_url">Form::frmCalender.xfdl</Col>
+      </Row>
+      <Row>
+        <Col id="m_id">4</Col>
+        <Col id="m_name">info</Col>
+        <Col id="m_level">0</Col>
+      </Row>
+      <Row>
+        <Col id="m_id">5</Col>
+        <Col id="m_name">setting</Col>
+        <Col id="m_level">1</Col>
+      </Row>
+      <Row>
+        <Col id="m_id">6</Col>
+        <Col id="m_name">myInfo</Col>
+        <Col id="m_level">1</Col>
+      </Row>
+      <Row>
+        <Col id="m_id">7</Col>
+        <Col id="m_name">logout</Col>
+        <Col id="m_level">0</Col>
+        <Col id="m_url">Form::frmLogin.xfdl</Col>
+      </Row>
+    </Rows>
+  </Dataset>
+  <Dataset id="gds_cars">
+    <ColumnInfo>
+      <Column id="id" type="STRING" size="256"/>
+      <Column id="year" type="INT"/>
+      <Column id="manufacturer" type="STRING" size="256"/>
+      <Column id="model" type="STRING" size="256"/>
+      <Column id="status" type="STRING" size="256"/>
+      <Column id="fuel" type="STRING" size="256"/>
+      <Column id="price_per_day" type="INT"/>
+      <Column id="type" type="STRING" size="256"/>
+      <Column id="class" type="STRING" size="256"/>
+    </ColumnInfo>
+    <Rows>
+      <Row>
+        <Col id="id">CAR001</Col>
+        <Col id="year">2018</Col>
+        <Col id="manufacturer">기아</Col>
+        <Col id="model">스포티지</Col>
+        <Col id="status">점검중</Col>
+        <Col id="fuel">디젤</Col>
+        <Col id="price_per_day">50475</Col>
+        <Col id="type">중형</Col>
+        <Col id="class">일반</Col>
+      </Row>
+      <Row>
+        <Col id="id">CAR002</Col>
+        <Col id="year">2017</Col>
+        <Col id="manufacturer">현대</Col>
+        <Col id="model">투싼</Col>
+        <Col id="status">사용가능</Col>
+        <Col id="fuel">디젤</Col>
+        <Col id="price_per_day">47117</Col>
+        <Col id="type">중형</Col>
+        <Col id="class">일반</Col>
+      </Row>
+      <Row>
+        <Col id="id">CAR003</Col>
+        <Col id="year">2016</Col>
+        <Col id="manufacturer">기아</Col>
+        <Col id="model">K7</Col>
+        <Col id="status">사용가능</Col>
+        <Col id="fuel">디젤</Col>
+        <Col id="price_per_day">54587</Col>
+        <Col id="type">대형</Col>
+        <Col id="class">일반</Col>
+      </Row>
+      <Row>
+        <Col id="id">CAR004</Col>
+        <Col id="year">2025</Col>
+        <Col id="manufacturer">현대</Col>
+        <Col id="model">아반떼</Col>
+        <Col id="status">렌트중</Col>
+        <Col id="fuel">전기</Col>
+        <Col id="price_per_day">42984</Col>
+        <Col id="type">소형</Col>
+        <Col id="class">일반</Col>
+      </Row>
+      <Row>
+        <Col id="id">CAR005</Col>
+        <Col id="year">2015</Col>
+        <Col id="manufacturer">기아</Col>
+        <Col id="model">K7</Col>
+        <Col id="status">점검중</Col>
+        <Col id="fuel">경유</Col>
+        <Col id="price_per_day">51780</Col>
+        <Col id="type">대형</Col>
+        <Col id="class">일반</Col>
+      </Row>
+      <Row>
+        <Col id="id">CAR006</Col>
+        <Col id="year">2019</Col>
+        <Col id="manufacturer">현대</Col>
+        <Col id="model">쏘나타</Col>
+        <Col id="status">사용가능</Col>
+        <Col id="fuel">디젤</Col>
+        <Col id="price_per_day">48800</Col>
+        <Col id="type">중형</Col>
+        <Col id="class">일반</Col>
+      </Row>
+      <Row>
+        <Col id="id">CAR007</Col>
+        <Col id="year">2022</Col>
+        <Col id="manufacturer">기아</Col>
+        <Col id="model">모닝</Col>
+        <Col id="status">렌트중</Col>
+        <Col id="fuel">경유</Col>
+        <Col id="price_per_day">39800</Col>
+        <Col id="type">소형</Col>
+        <Col id="class">일반</Col>
+      </Row>
+      <Row>
+        <Col id="id">CAR008</Col>
+        <Col id="year">2020</Col>
+        <Col id="manufacturer">벤츠</Col>
+        <Col id="model">E클래스</Col>
+        <Col id="status">렌트중</Col>
+        <Col id="fuel">디젤</Col>
+        <Col id="price_per_day">85000</Col>
+        <Col id="type">대형</Col>
+        <Col id="class">럭셔리</Col>
+      </Row>
+      <Row>
+        <Col id="id">CAR009</Col>
+        <Col id="year">2021</Col>
+        <Col id="manufacturer">BMW</Col>
+        <Col id="model">X5</Col>
+        <Col id="status">사용가능</Col>
+        <Col id="fuel">경유</Col>
+        <Col id="price_per_day">88000</Col>
+        <Col id="type">대형</Col>
+        <Col id="class">럭셔리</Col>
+      </Row>
+      <Row>
+        <Col id="id">CAR010</Col>
+        <Col id="year">2023</Col>
+        <Col id="manufacturer">테슬라</Col>
+        <Col id="model">모델3</Col>
+        <Col id="status">사용가능</Col>
+        <Col id="fuel">전기</Col>
+        <Col id="price_per_day">91000</Col>
+        <Col id="type">중형</Col>
+        <Col id="class">럭셔리</Col>
+      </Row>
+      <Row>
+        <Col id="id">CAR011</Col>
+        <Col id="year">2019</Col>
+        <Col id="manufacturer">현대</Col>
+        <Col id="model">그랜저</Col>
+        <Col id="status">렌트중</Col>
+        <Col id="fuel">경유</Col>
+        <Col id="price_per_day">55000</Col>
+        <Col id="type">대형</Col>
+        <Col id="class">일반</Col>
+      </Row>
+      <Row>
+        <Col id="id">CAR012</Col>
+        <Col id="year">2018</Col>
+        <Col id="manufacturer">기아</Col>
+        <Col id="model">K5</Col>
+        <Col id="status">사용가능</Col>
+        <Col id="fuel">디젤</Col>
+        <Col id="price_per_day">51000</Col>
+        <Col id="type">중형</Col>
+        <Col id="class">일반</Col>
+      </Row>
+      <Row>
+        <Col id="id">CAR013</Col>
+        <Col id="year">2021</Col>
+        <Col id="manufacturer">현대</Col>
+        <Col id="model">아이오닉</Col>
+        <Col id="status">렌트중</Col>
+        <Col id="fuel">전기</Col>
+        <Col id="price_per_day">58000</Col>
+        <Col id="type">중형</Col>
+        <Col id="class">일반</Col>
+      </Row>
+      <Row>
+        <Col id="id">CAR014</Col>
+        <Col id="year">2017</Col>
+        <Col id="manufacturer">기아</Col>
+        <Col id="model">스포티지</Col>
+        <Col id="status">사용가능</Col>
+        <Col id="fuel">디젤</Col>
+        <Col id="price_per_day">49500</Col>
+        <Col id="type">중형</Col>
+        <Col id="class">일반</Col>
+      </Row>
+      <Row>
+        <Col id="id">CAR015</Col>
+        <Col id="year">2020</Col>
+        <Col id="manufacturer">벤츠</Col>
+        <Col id="model">GLA</Col>
+        <Col id="status">점검중</Col>
+        <Col id="fuel">전기</Col>
+        <Col id="price_per_day">87000</Col>
+        <Col id="type">소형</Col>
+        <Col id="class">럭셔리</Col>
+      </Row>
+      <Row>
+        <Col id="id">CAR016</Col>
+        <Col id="year">2018</Col>
+        <Col id="manufacturer">기아</Col>
+        <Col id="model">K3</Col>
+        <Col id="status">사용가능</Col>
+        <Col id="fuel">디젤</Col>
+        <Col id="price_per_day">47000</Col>
+        <Col id="type">소형</Col>
+        <Col id="class">일반</Col>
+      </Row>
+      <Row>
+        <Col id="id">CAR017</Col>
+        <Col id="year">2020</Col>
+        <Col id="manufacturer">현대</Col>
+        <Col id="model">베뉴</Col>
+        <Col id="status">렌트중</Col>
+        <Col id="fuel">디젤</Col>
+        <Col id="price_per_day">45000</Col>
+        <Col id="type">소형</Col>
+        <Col id="class">일반</Col>
+      </Row>
+      <Row>
+        <Col id="id">CAR018</Col>
+        <Col id="year">2019</Col>
+        <Col id="manufacturer">BMW</Col>
+        <Col id="model">320i</Col>
+        <Col id="status">사용가능</Col>
+        <Col id="fuel">경유</Col>
+        <Col id="price_per_day">86000</Col>
+        <Col id="type">중형</Col>
+        <Col id="class">럭셔리</Col>
+      </Row>
+      <Row>
+        <Col id="id">CAR019</Col>
+        <Col id="year">2023</Col>
+        <Col id="manufacturer">테슬라</Col>
+        <Col id="model">모델X</Col>
+        <Col id="status">렌트중</Col>
+        <Col id="fuel">전기</Col>
+        <Col id="price_per_day">98000</Col>
+        <Col id="type">대형</Col>
+        <Col id="class">럭셔리</Col>
+      </Row>
+      <Row>
+        <Col id="id">CAR020</Col>
+        <Col id="year">2017</Col>
+        <Col id="manufacturer">현대</Col>
+        <Col id="model">i30</Col>
+        <Col id="status">사용가능</Col>
+        <Col id="fuel">디젤</Col>
+        <Col id="price_per_day">44000</Col>
+        <Col id="type">소형</Col>
+        <Col id="class">일반</Col>
+      </Row>
+      <Row>
+        <Col id="id">CAR021</Col>
+        <Col id="year">2021</Col>
+        <Col id="manufacturer">기아</Col>
+        <Col id="model">쏘렌토</Col>
+        <Col id="status">점검중</Col>
+        <Col id="fuel">디젤</Col>
+        <Col id="price_per_day">53000</Col>
+        <Col id="type">대형</Col>
+        <Col id="class">일반</Col>
+      </Row>
+      <Row>
+        <Col id="id">CAR022</Col>
+        <Col id="year">2018</Col>
+        <Col id="manufacturer">벤츠</Col>
+        <Col id="model">C클래스</Col>
+        <Col id="status">사용가능</Col>
+        <Col id="fuel">디젤</Col>
+        <Col id="price_per_day">83000</Col>
+        <Col id="type">중형</Col>
+        <Col id="class">럭셔리</Col>
+      </Row>
+      <Row>
+        <Col id="id">CAR023</Col>
+        <Col id="year">2016</Col>
+        <Col id="manufacturer">현대</Col>
+        <Col id="model">아반떼</Col>
+        <Col id="status">렌트중</Col>
+        <Col id="fuel">경유</Col>
+        <Col id="price_per_day">41000</Col>
+        <Col id="type">소형</Col>
+        <Col id="class">일반</Col>
+      </Row>
+      <Row>
+        <Col id="id">CAR024</Col>
+        <Col id="year">2020</Col>
+        <Col id="manufacturer">기아</Col>
+        <Col id="model">K9</Col>
+        <Col id="status">사용가능</Col>
+        <Col id="fuel">경유</Col>
+        <Col id="price_per_day">56000</Col>
+        <Col id="type">대형</Col>
+        <Col id="class">일반</Col>
+      </Row>
+      <Row>
+        <Col id="id">CAR025</Col>
+        <Col id="year">2022</Col>
+        <Col id="manufacturer">BMW</Col>
+        <Col id="model">i4</Col>
+        <Col id="status">렌트중</Col>
+        <Col id="fuel">전기</Col>
+        <Col id="price_per_day">89000</Col>
+        <Col id="type">중형</Col>
+        <Col id="class">럭셔리</Col>
+      </Row>
+      <Row>
+        <Col id="id">CAR026</Col>
+        <Col id="year">2017</Col>
+        <Col id="manufacturer">기아</Col>
+        <Col id="model">K3</Col>
+        <Col id="status">사용가능</Col>
+        <Col id="fuel">디젤</Col>
+        <Col id="price_per_day">45000</Col>
+        <Col id="type">소형</Col>
+        <Col id="class">일반</Col>
+      </Row>
+      <Row>
+        <Col id="id">CAR027</Col>
+        <Col id="year">2023</Col>
+        <Col id="manufacturer">테슬라</Col>
+        <Col id="model">모델Y</Col>
+        <Col id="status">렌트중</Col>
+        <Col id="fuel">전기</Col>
+        <Col id="price_per_day">94000</Col>
+        <Col id="type">대형</Col>
+        <Col id="class">럭셔리</Col>
+      </Row>
+      <Row>
+        <Col id="id">CAR028</Col>
+        <Col id="year">2015</Col>
+        <Col id="manufacturer">현대</Col>
+        <Col id="model">쏘나타</Col>
+        <Col id="status">사용가능</Col>
+        <Col id="fuel">디젤</Col>
+        <Col id="price_per_day">43000</Col>
+        <Col id="type">중형</Col>
+        <Col id="class">일반</Col>
+      </Row>
+      <Row>
+        <Col id="id">CAR029</Col>
+        <Col id="year">2019</Col>
+        <Col id="manufacturer">기아</Col>
+        <Col id="model">K5</Col>
+        <Col id="status">렌트중</Col>
+        <Col id="fuel">디젤</Col>
+        <Col id="price_per_day">52000</Col>
+        <Col id="type">중형</Col>
+        <Col id="class">일반</Col>
+      </Row>
+      <Row>
+        <Col id="id">CAR030</Col>
+        <Col id="year">2022</Col>
+        <Col id="manufacturer">현대</Col>
+        <Col id="model">팰리세이드</Col>
+        <Col id="status">사용가능</Col>
+        <Col id="fuel">디젤</Col>
+        <Col id="price_per_day">60000</Col>
+        <Col id="type">대형</Col>
+        <Col id="class">일반</Col>
+      </Row>
+    </Rows>
+  </Dataset>
+  <Dataset id="gds_users">
+    <ColumnInfo>
+      <Column id="id" type="STRING" size="256"/>
+      <Column id="pw" type="STRING" size="256"/>
+      <Column id="name" type="STRING" size="256"/>
+      <Column id="email" type="STRING" size="256"/>
+    </ColumnInfo>
+    <Rows>
+      <Row>
+        <Col id="id">admin</Col>
+        <Col id="pw">1234</Col>
+        <Col id="name">admin</Col>
+        <Col id="email">admin@gm.com</Col>
+      </Row>
+      <Row>
+        <Col id="id">user1</Col>
+        <Col id="pw">1234</Col>
+        <Col id="name">user1</Col>
+        <Col id="email">user1@gm.com</Col>
+      </Row>
+    </Rows>
+  </Dataset>
+  <Dataset id="gds_reservation">
+    <ColumnInfo>
+      <Column id="reservation_id" type="STRING" size="20"/>
+      <Column id="customer_id" type="STRING" size="20"/>
+      <Column id="car_id" type="STRING" size="20"/>
+      <Column id="start_date" type="STRING" size="40"/>
+      <Column id="end_date" type="STRING" size="40"/>
+      <Column id="status" type="STRING" size="20"/>
+      <Column id="note" type="STRING" size="256"/>
+    </ColumnInfo>
+    <Rows>
+      <Row>
+        <Col id="reservation_id">RES208</Col>
+        <Col id="customer_id">CUST002</Col>
+        <Col id="car_id">CAR003</Col>
+        <Col id="start_date">2025-04-02</Col>
+        <Col id="end_date">2025-04-07</Col>
+        <Col id="status">예약됨</Col>
+        <Col id="note">첫 예약</Col>
+      </Row>
+      <Row>
+        <Col id="reservation_id">RES406</Col>
+        <Col id="customer_id">CUST002</Col>
+        <Col id="car_id">CAR002</Col>
+        <Col id="start_date">2025-04-27</Col>
+        <Col id="end_date">2025-05-02</Col>
+        <Col id="status">취소됨</Col>
+        <Col id="note">길게 예약</Col>
+      </Row>
+      <Row>
+        <Col id="reservation_id">RES181</Col>
+        <Col id="customer_id">CUST005</Col>
+        <Col id="car_id">CAR005</Col>
+        <Col id="start_date">2025-06-04</Col>
+        <Col id="end_date">2025-06-08</Col>
+        <Col id="status">취소됨</Col>
+        <Col id="note">길게 예약</Col>
+      </Row>
+      <Row>
+        <Col id="reservation_id">RES488</Col>
+        <Col id="customer_id">CUST001</Col>
+        <Col id="car_id">CAR003</Col>
+        <Col id="start_date">2025-05-28</Col>
+        <Col id="end_date">2025-06-01</Col>
+        <Col id="status">취소됨</Col>
+        <Col id="note">첫 예약</Col>
+      </Row>
+      <Row>
+        <Col id="reservation_id">RES743</Col>
+        <Col id="customer_id">CUST004</Col>
+        <Col id="car_id">CAR003</Col>
+        <Col id="start_date">2025-05-13</Col>
+        <Col id="end_date">2025-05-15</Col>
+        <Col id="status">예약됨</Col>
+        <Col id="note">길게 예약</Col>
+      </Row>
+      <Row>
+        <Col id="reservation_id">RES328</Col>
+        <Col id="customer_id">CUST002</Col>
+        <Col id="car_id">CAR005</Col>
+        <Col id="start_date">2025-05-05</Col>
+        <Col id="end_date">2025-05-06</Col>
+        <Col id="status">예약됨</Col>
+        <Col id="note">특별 예약</Col>
+      </Row>
+      <Row>
+        <Col id="reservation_id">RES786</Col>
+        <Col id="customer_id">CUST003</Col>
+        <Col id="car_id">CAR002</Col>
+        <Col id="start_date">2025-04-24</Col>
+        <Col id="end_date">2025-04-26</Col>
+        <Col id="status">예약됨</Col>
+        <Col id="note">첫 예약</Col>
+      </Row>
+      <Row>
+        <Col id="reservation_id">RES271</Col>
+        <Col id="customer_id">CUST004</Col>
+        <Col id="car_id">CAR002</Col>
+        <Col id="start_date">2025-06-15</Col>
+        <Col id="end_date">2025-06-20</Col>
+        <Col id="status">예약됨</Col>
+        <Col id="note">단기 예약</Col>
+      </Row>
+      <Row>
+        <Col id="reservation_id">RES910</Col>
+        <Col id="customer_id">CUST001</Col>
+        <Col id="car_id">CAR005</Col>
+        <Col id="start_date">2025-06-28</Col>
+        <Col id="end_date">2025-07-02</Col>
+        <Col id="status">예약됨</Col>
+        <Col id="note">단기 예약</Col>
+      </Row>
+      <Row>
+        <Col id="reservation_id">RES401</Col>
+        <Col id="customer_id">CUST003</Col>
+        <Col id="car_id">CAR005</Col>
+        <Col id="start_date">2025-06-25</Col>
+        <Col id="end_date">2025-06-27</Col>
+        <Col id="status">취소됨</Col>
+        <Col id="note">재예약</Col>
+      </Row>
+    </Rows>
+  </Dataset>
+</GlobalVariables>
