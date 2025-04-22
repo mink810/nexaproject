@@ -3,7 +3,15 @@
   <TypeDefinition url="..\default_typedef.xml"/>
   <Form id="frmMain" left="0" top="0" width="1024" height="768" titletext="New Form">
     <Layouts>
-      <Layout/>
+      <Layout>
+        <Static id="Static00" taborder="0" text="환영합니다!  ! ! !" left="23.54%" top="268" right="19.34%" height="212" style="align:middle;font:bold 18 Dotum;" onclick="Static00_onclick"/>
+      </Layout>
     </Layouts>
+    <Script type="xscript5.0"><![CDATA[
+this.Static00_onclick = function(obj:Static, e:nexacro.ClickEventInfo)
+{
+	
+}
+]]></Script>
   </Form>
 </FDL>

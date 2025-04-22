@@ -1,17 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="1.5">
   <TypeDefinition url="..\default_typedef.xml"/>
-  <Form id="frmTop" left="0" top="0" width="1024" height="768" titletext="New Form">
+  <Form id="frmTop" left="0" top="0" width="1024" height="768" titletext="New Form" onload="frmTop_onload">
     <Layouts>
       <Layout>
-        <Menu id="Menu00" taborder="0" left="33.59%" top="10" right="10" height="50" onmenuclick="Menu00_onmenuclick" innerdataset="@gds_menu" captioncolumn="m_name" idcolumn="m_id" levelcolumn="m_level" userdatacolumn="m_url"/>
+        <Menu id="Menu00" taborder="0" left="49.22%" top="10" right="10" height="50" onmenuclick="Menu00_onmenuclick" innerdataset="@gds_menu" captioncolumn="m_name" idcolumn="m_id" levelcolumn="m_level" userdatacolumn="m_url"/>
+        <Div id="div_main" taborder="1" left="0%" top="69" right="0.1%" height="697"/>
       </Layout>
     </Layouts>
-    <Script type="xscript5.0"><![CDATA[
-this.Menu00_onmenuclick = function(obj:Menu, e:nexacro.MenuClickEventInfo)
+    <Script type="xscript5.0"><![CDATA[this.Menu00_onmenuclick = function(obj:Menu, e:nexacro.MenuClickEventInfo)
 {
 	var sID = e.id;
 	var sUI = application.gds_menu.lookup("m_id", sID, "m_url");
-	}]]></Script>
+	
+	this.div_main.set_url(sUI);
+}
+
+
+this.frmTop_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.div_main.set_url("Form::frmMain.xfdl");
+}
+]]></Script>
   </Form>
 </FDL>

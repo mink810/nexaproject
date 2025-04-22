@@ -52,7 +52,7 @@
               <Radio id="Radio00" taborder="5" left="15.77%" top="577" right="11.54%" height="26" innerdataset="@ds_class" codecolumn="class" datacolumn="class" columncount="2"/>
               <Combo id="Combo01" taborder="6" text="Combo00" left="15.77%" top="225" right="11.54%" height="26"/>
               <Combo id="Combo05" taborder="7" text="Combo00" left="15.77%" top="516" right="11.54%" height="26" onitemchanged="Div00_Combo05_onitemchanged" innerdataset="@ds_carType" codecolumn="type" datacolumn="type"/>
-              <CheckBox id="CheckBox00" taborder="8" text="경유" left="15.38%" top="361" right="48.08%" height="26"/>
+              <CheckBox id="CheckBox00" taborder="8" text="경유" left="15.38%" top="366" right="61.15%" height="26" onclick="Div00_CheckBox00_onclick"/>
               <Button id="Button00" taborder="9" text="조회" left="15.77%" top="640" right="11.54%" height="26" onclick="Div00_Button00_onclick"/>
               <Static id="Static00" taborder="10" text="제조사/ 모델" left="15.77%" top="172" right="11.54%" height="26" style="font:bold 9 Dotum;"/>
               <Static id="Static01" taborder="11" text="상태" left="15.77%" top="274" right="11.54%" height="26" style="font:bold 9 Dotum;"/>
@@ -66,9 +66,9 @@
               <Calendar id="cldEdate" taborder="19" left="15.77%" top="118" right="11.54%" height="26"/>
               <Static id="Static06" taborder="20" text="사용 시작일" left="15.77%" top="36" right="11.54%" height="26" style="font:bold 9 Dotum;"/>
               <Static id="Static07" taborder="21" text="반납일" left="15.77%" top="92" right="11.54%" height="26" style="font:bold 9 Dotum;"/>
-              <CheckBox id="CheckBox01" taborder="22" text="디젤" left="36.92%" top="361" right="26.54%" height="26"/>
-              <CheckBox id="CheckBox02" taborder="23" text="전기" left="58.46%" top="361" right="5%" height="26"/>
               <Static id="Static08" taborder="24" text="~" left="82.69%" top="424" right="6.15%" height="29" style="font:12 Dotum;"/>
+              <CheckBox id="CheckBox01" taborder="25" text="디젤" onclick="Div00_CheckBox00_onclick" left="40%" top="366" right="36.54%" height="26"/>
+              <CheckBox id="CheckBox02" taborder="26" text="전기" onclick="Div00_CheckBox00_onclick" left="64.62%" top="366" right="11.92%" height="26"/>
             </Layout>
           </Layouts>
         </Div>
@@ -192,19 +192,44 @@ this.Grid00_oncellclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
     );
 }
 
+
+
+// 날짜 형식 변환 함수
+function formatDate(dateObj) {
+    if (!dateObj) return "";
+
+    var y = dateObj.getFullYear();
+    var m = dateObj.getMonth() + 1;
+    var d = dateObj.getDate();
+
+    m = (m < 10 ? "0" + m : "" + m);
+    d = (d < 10 ? "0" + d : "" + d);
+
+    return y + m + d;
+}
+
+
 this.Div00_Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
 {
-	    var maker = this.Div00.Combo00.value;
-		var status = this.Div00.Combo02.value;
-		var minPrice = this.Div00.minPrice.value;
-		var maxPrice = this.Div00.maxPrice.value;
-		var type = this.Div00.Combo05.value;
-		var carClass = this.Div00.Radio00.value;
+    var maker = this.Div00.Combo00.value;
+    var status = this.Div00.Combo02.value;
+    var minPrice = this.Div00.minPrice.value;
+    var maxPrice = this.Div00.maxPrice.value;
+    var type = this.Div00.Combo05.value;
+    var carClass = this.Div00.Radio00.value;
 
-    // 전역 Dataset 접근
+    var sdate = this.Div00.cldSdate.value;
+    var edate = this.Div00.cldEdate.value;
+    
+    trace("입력받은 값: " + sdate, edate);
+
+    sdate = formatDate(sdate);
+    edate = formatDate(edate);
+    
+    trace("포맷된 값: " + sdate, edate);
+
     var cars = application.gds_cars;
-
-    // 필터 초기화
+    var reservations = application.gds_reservation;
     cars.filter("");
 
     var condition = [];
@@ -215,28 +240,66 @@ this.Div00_Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
     if (status) {
         condition.push("status == '" + status + "'");
     }
-    
-	if (minPrice !== null && minPrice !== "" && !isNaN(minPrice)) {
-		condition.push("price_per_day >= " + minPrice);
-	}
-	if (maxPrice !== null && maxPrice !== "" && !isNaN(maxPrice)) {
-		condition.push("price_per_day <= " + maxPrice);
-	}
-
-	    if (type) {
+    if (minPrice !== null && minPrice !== "" && !isNaN(minPrice)) {
+        condition.push("price_per_day >= " + minPrice);
+    }
+    if (maxPrice !== null && maxPrice !== "" && !isNaN(maxPrice)) {
+        condition.push("price_per_day <= " + maxPrice);
+    }
+    if (type) {
         condition.push("type == '" + type + "'");
     }
     if (carClass) {
         condition.push("class == '" + carClass + "'");
     }
-    if (condition.length > 0) {
-        cars.filter(condition.join(" && "));
-        
-    }
     
-    trace("필터 조건: " + condition.join(" && "));
+        // 체크박스 조건 추가
+		var fuelConditions = [];
+	if (this.Div00.CheckBox00.isChecked()) {
+		fuelConditions.push("fuel == '경유'");
+	}
+	if (this.Div00.CheckBox01.isChecked()) {
+		fuelConditions.push("fuel == '디젤'");
+	}
+	if (this.Div00.CheckBox02.isChecked()) {
+		fuelConditions.push("fuel == '전기'");
+	}
 
-}
+	// 체크박스 필터가 선택된 경우 조건 추가
+	if (fuelConditions.length > 0) {
+		trace("체크박스 필터가 선택된 경우");
+		condition.push("(" + fuelConditions.join(" || ") + ")");
+	}
+
+
+    // 날짜 조건
+    if (sdate && edate) {
+        var len = reservations.getRowCount();
+        var newCondition = [];
+		trace("예약 차량 숫자: ", len)
+        for (var i = 0; i < len; i++) {
+            var rStart = reservations.getColumn(i, "start_date");
+            var rEnd = reservations.getColumn(i, "end_date");
+			trace("예약 날짜: ", rStart, rEnd)
+            if (rStart && rEnd && rEnd < sdate || rStart > edate) {
+                newCondition.push("id == '" + cars.getColumn(i, "id") + "'");
+            }
+        }
+
+        if (newCondition.length > 0) {
+            condition.push("(" + newCondition.join(" || ") + ")");
+        }
+    }
+
+    if (condition.length > 0) {
+        var filterStr = condition.join(" && ");
+        cars.filter(filterStr);
+        trace("필터 조건: " + filterStr);
+    } else {
+        trace("필터 조건 없음");
+    }
+};
+
 ]]></Script>
   </Form>
 </FDL>

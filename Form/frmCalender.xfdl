@@ -36,7 +36,7 @@
                 <Cell col="3" text="bind:col3"/>
                 <Cell col="4" text="bind:col4"/>
                 <Cell col="5" text="bind:col5"/>
-                <Cell col="6" style="background:bisque;" text="bind:col6"/>
+                <Cell col="6" text="bind:col6"/>
               </Band>
             </Format>
           </Formats>
@@ -81,16 +81,9 @@ this.Div00_btnNext_onclick = function(obj:Button, e:nexacro.ClickEventInfo) {
 
 // 폼 로딩 시 달력 초기화
 this.frmCalendar_onload = function(obj:Form, e:nexacro.LoadEventInfo) {
-    var reservations = application.gds_reservation;
-    var rowCount = reservations.getRowCount();
-
-    for (var i = 0; i < rowCount; i++) {
-        var startDate = reservations.getColumn(i, "start_date");
-        var endDate = reservations.getColumn(i, "end_date");
-    }
-
     this.drawCalendar(this.currentYear, this.currentMonth);
 };
+
 
 // 특정 날짜에 예약이 있는지 확인하는 함수
 this.checkReservationForDate = function(dateString) {
@@ -123,6 +116,7 @@ this.drawCalendar = function(year, month) {
         this.Grid00.setCellProperty("body", i, "text", "bind:col" + i);
         this.Grid00.setCellProperty("body", i, "style", "bind:style" + i);
     }
+    
     for (var i = 0; i < 6; i++) {
         this.Dataset00.addRow();
     }
@@ -141,17 +135,20 @@ this.drawCalendar = function(year, month) {
                 var dateString = year + "-" + mm + "-" + dd;
                 var hasReservation = this.checkReservationForDate(dateString);
 
-                if (hasReservation) {
-                    this.Dataset00.setColumn(row, "col" + col, date + " (예약됨)");
-                    this.Grid00.setCellProperty("body", row * 7 + col, "background", "yellow");
-                } else {
-                    this.Dataset00.setColumn(row, "col" + col, date + "");
-                    this.Grid00.setCellProperty("body", row * 7 + col, "background", "transparent");
-                }
+			if (hasReservation) {
+				//this.Dataset00.setColumn(row, "col" + col, date + " (예약됨)");
+				this.Dataset00.setColumn(row,"col" + col, { );
+				
+				
+				//this.Dataset00.setColumn(row, "style" + col, "font:bold;"); 
+
+			} else {
+				this.Dataset00.setColumn(row, "col" + col, date + "");
+				this.Dataset00.setColumn(row, "style" + col, "");
+			}
                 date++;
             } else {
                 this.Dataset00.setColumn(row, "col" + col, "");
-                this.Grid00.setCellProperty("body", row * 7 + col, "background", "transparent");
             }
         }
     }
@@ -161,6 +158,32 @@ this.drawCalendar = function(year, month) {
 };
 
 
+
+
+
+// 특정 날짜에 대한 예약 상세 정보를 가져오는 함수
+this.getReservationDetail = function(dateString) {
+    var reservations = application.gds_reservation;
+    var reservationCount = reservations.getRowCount();
+
+    for (var i = 0; i < reservationCount; i++) {
+        var startDate = reservations.getColumn(i, "start_date");
+        var endDate = reservations.getColumn(i, "end_date");
+
+        if (dateString >= startDate && dateString <= endDate) {
+            return {
+                reservation_id: reservations.getColumn(i, "reservation_id"),
+                customer_id: reservations.getColumn(i, "customer_id"),
+                car_id: reservations.getColumn(i, "car_id"),
+                start_date: startDate,
+                end_date: endDate,
+                status: reservations.getColumn(i, "status"),
+                note: reservations.getColumn(i, "note")
+            };
+        }
+    }
+    return null;
+};
 
 // 그리드 셀 클릭 시 예약 정보 표시
 this.Grid00_oncellclick = function(obj:Grid, e:nexacro.GridClickEventInfo) {
